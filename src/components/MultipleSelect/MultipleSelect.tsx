@@ -1,19 +1,36 @@
-import {useState} from 'react';
+import {ChangeEvent, useState} from 'react';
+import { FilterProperties } from '../../enums/PokeEnum';
+import { Filter, IFilter } from '../../types/InputTypes';
 
 import ArrowIcon from '../../assets/imgs/arrow.svg';
 
 import styles from './MultipleSelect.module.scss';
 const MultipleSelect = () =>
 {
-    const [optionsSelected, setOptionsSelected] = useState([]);
-    const select_Options = [{id: 0, name: "FIRE"}, {id: 1, name: "WATER"}];
+    const options: IFilter = {};
+    const [isOptionsMenuOpened, setIsOptionsMenuOpened] = useState<boolean>(false);
+    function HandleFilterChange(e: ChangeEvent<HTMLInputElement>)
+    {
+        const opt: Filter = {name: e.target.name as FilterProperties, state: e.target.checked};
+        options[opt.name] = opt
+        //console.log(options);
+    }
+
     return(
-        <div className={styles.select_container}>
-            <p className={styles.select_text}>Selecione</p>
-            <img alt='Select Arrow Icon' src={ArrowIcon}/>
-            {/* <select className='select_menu' name='filter_select'>
-                {select_Options.map ( (opt) => <option key={opt.name}>{opt.name}</option>)}
-            </select> */}
+        <div className={styles.container}>
+            <div onClick={() => setIsOptionsMenuOpened(!isOptionsMenuOpened)} className={styles.select_container}>
+                <p className={styles.select_text}>Filtro</p>
+                <img className={`${styles.select_image} ${isOptionsMenuOpened ? '' : styles.hideOptMenu}`} alt='Select Arrow Icon' src={ArrowIcon}/>
+            </div>
+            <div className={`${styles.options_container} ${isOptionsMenuOpened ? '' : styles.hideOptMenu}`}>
+                {(Object.keys(FilterProperties) as (keyof typeof FilterProperties)[]).map( k =>
+                    <div key={k}>
+                        <input onChange={HandleFilterChange} className={styles.option_check} type="checkbox" name={k} id={k} />
+                        <label htmlFor={k} className={styles.option_custom_check}/>
+                        <label className={styles.option_text} htmlFor={k}>{k}</label>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

@@ -1,29 +1,123 @@
-.select_container
+.container
 {
-    width: 210px;
-    background-color: rgba(216, 182, 182, 0.4);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-}
-
-
-/* .select_container .select_menu
-{
-    background: url("../../assets/imgs/arrow.svg") no-repeat;
-    background-position: calc(100% - 0.75rem) center !important;
-    -moz-appearance:none !important;
-    -webkit-appearance: none !important; 
-    appearance: none !important;
-    padding-right: 2rem !important;
-    cursor: pointer;
-    padding-left: 20px;
-    height: 100%;
-    width: 100%;
-    color: rgba(38, 28, 60, 0.4);
+    width: 280px;
     font-family: 'Bungee Inline';
-    font-size: 15px;
+    color: rgba(38, 28, 60, 0.4);
+    position: relative;
+    user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
 }
-.select_container .select_menu:focus
+.container .select_container
 {
-    outline: none;
-} */
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: rgba(216, 182, 182, 0.4); 
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.container .select_container .select_image
+{
+    width: 25px;
+    transform: rotate(-180deg);
+    transition: transform 0.3s ease-out;
+}
+.container .select_container .select_image.hideOptMenu
+{
+    transform: rotate(0);
+    transition: transform 0.3s ease-in;
+}
+
+.container .options_container
+{
+    position: absolute;
+    width: 100%;
+    top: 95px;
+    background-color: #EEE0E1;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transform-origin: top;
+    transform: scaleY(1);
+    transition: transform 0.2s ease-in;
+}
+
+.container .options_container.hideOptMenu
+{
+    transform: scaleY(0);
+    visibility: hidden;
+    overflow: hidden;
+    transition: all 0.2s ease-out;
+}
+
+.container .options_container div
+{ 
+    display: flex;
+    transition: opacity 0.8s ease-in;
+}
+
+.container .options_container.hideOptMenu > div
+{
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.1s ease-out;
+}
+
+.container .options_container .option_check
+{
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+
+.container .options_container .option_custom_check
+{
+    margin-left: 20px;
+    top: 12px;
+    width: 40px;
+    height: 15px;
+    background: grey;
+    display: inline-block;
+    border-radius: 100px;
+    position: relative;
+    cursor: pointer;
+}
+.container .options_container .option_custom_check::after
+{
+    content: '';
+	position: absolute;
+	top: 2px;
+	left: 5px;
+	width: 10px;
+	height: 10px;
+	background: #fff;
+	border-radius: 90px;
+	transition: 0.3s;
+}
+
+.option_check:checked + .option_custom_check {
+	background: #bada55;
+}
+
+.option_check:checked + .option_custom_check:after {
+	left: calc(100% - 5px);
+	transform: translateX(-100%);
+}
+
+.container .options_container .option_custom_check:active::after
+{
+    width: 15px;
+}
+
+
+.container .options_container .option_text
+{
+    margin-left: 10px;
+    flex: 1;
+    cursor: pointer;
+}

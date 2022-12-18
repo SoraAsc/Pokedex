@@ -54,7 +54,7 @@
     transition: all 0.2s ease-out;
 }
 
-.container .options_container div
+.container .options_container > div
 { 
     display: flex;
     transition: opacity 0.8s ease-in;

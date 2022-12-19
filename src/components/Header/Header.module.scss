@@ -1,22 +1,30 @@
+@import '../../styles/theme-variable.scss';
 @font-face {
     font-family: "Pocket Monk";
     src: local("Pocket Monk"), url("./../../assets/fonts/Pocket\ Monk.otf") format("otf");
 }
 
-.header_container 
+.container 
 {
-    background-color: #FBFBFD;
     display: flex;
     justify-content: space-between;
     padding: 30px 39px 30px 39px;
-
     font-family: "Pocket Monk";
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+    @include themify($themes)
+    {
+        background-color: themed("headerBackgroundColor");
+    }
 }
 
-.header_container .poke_title
+.container .poke_title
 {
     color: #FF0000;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     font-size: 64px;
+}
+
+.container > img
+{
+    cursor: pointer;
 }

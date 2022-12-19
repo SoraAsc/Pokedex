@@ -1,3 +1,4 @@
+@import '../../styles/theme-variable.scss';
 .container
 {
     //position: relative;
@@ -12,31 +13,26 @@
 
 .container .text_zone
 {
-    color: rgba(38, 28, 60, 0.4);
+    @include themify($themes)
+    {
+        color: themed("textColorTransparency");
+    }
     background-color: transparent;
-    //padding-left: 30px;
     padding: 0 10px 0 30px;
     font-family: 'Bungee Inline';
     font-weight: 400;
     font-size: 15px;
     flex: 1;
 }
-.container .text_zone::placeholder
-{
-    color: rgba(38, 28, 60, 0.4);
-    
-}
+
 .container .text_zone:focus{
     outline: none;
-    //color: red;
 }
 
 .container .text_search_icon
 {
     width: 40px;
     padding-right: 30px;
-    // position: absolute;
-    // right: 0;
     transition: opacity 0.2s ease-in;
 }
 

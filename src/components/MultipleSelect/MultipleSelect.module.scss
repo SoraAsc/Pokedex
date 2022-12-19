@@ -1,3 +1,4 @@
+@import '../../styles/theme-variable.scss';
 .container
 {
     width: 280px;
@@ -7,6 +8,10 @@
     user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
+    @include themify($themes)
+    {
+        color: themed("textColorTransparency");
+    }
 }
 .container .select_container
 {
@@ -36,7 +41,10 @@
     position: absolute;
     width: 100%;
     top: 95px;
-    background-color: #EEE0E1;
+    @include themify($themes)
+    {
+        background-color: themed("optionsBackgroundColor");
+    }
     border-radius: 8px;
     display: flex;
     flex-direction: column;

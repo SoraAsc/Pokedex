@@ -1,0 +1,10 @@
+@import 'styles/theme-variable.scss';
+
+.App
+{
+    height: 100vh;
+    @include themify($themes)
+    {
+        background-color: themed("backgroundColor");
+    }
+}

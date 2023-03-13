@@ -1,14 +1,14 @@
-import {FC, useContext, useState} from 'react';
+import { useContext} from 'react';
 import MultipleSelect from '../MultipleSelect/MultipleSelect';
+import TextInput from '../TextInput/TextInput';
 import { ThemeContext } from '../../contexts/theme-context';
 
-import TextInput from '../TextInput/TextInput';
 import MoonIcon from '../../assets/imgs/moon.svg';
 import SunIcon from '../../assets/imgs/sun.svg';
 
 import styles from './Header.module.scss';
 
-const Header: FC = () => 
+const Header = () => 
 {
     const { theme, setTheme } = useContext(ThemeContext);
     const handleThemeChange = () => {

@@ -1,6 +1,21 @@
 export enum FilterProperties
 {
+    Normal = "Normal",
     Fire = "Fire",
-    Grass = "Grass",
     Water = "Water",
+    Grass = "Grass",
+    Flying = "Flying",
+    Fighting = "Fighting",
+    Poison = "Poison",
+    Electric = "Electric",
+    Ground = "Ground",
+    Rock = "Rock",
+    Psychic = "Psychic",
+    Ice = "Ice",
+    Bug = "Bug",
+    Ghost = "Ghost",
+    Stell = "Steel",
+    Dragon = "Dragon",
+    Dark = "Dark",
+    Fairy = "Fairy",
 }

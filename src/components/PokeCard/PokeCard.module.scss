@@ -1,0 +1,47 @@
+@import '../../styles/theme-variable.scss';
+
+.container
+{
+    margin-top: 20px;
+    width: 85%;
+    height: 10vw;
+    border-radius: 40px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: 'Bungee', cursive;
+    font-size: 0.8vw;
+    cursor: pointer;
+    @include themify($themes)
+    {
+        background-color: themed("pokeCardBackgroundColor");
+        color: themed("pokeCardTextColor");
+    }
+
+    .card_sub
+    {
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2vw 0 2vw;
+
+        .card_image
+        {
+            position: relative;
+            width: 8vw;
+            bottom: 1.5vw;
+            margin-right: 1vw;
+        }
+        .card_details
+        {
+            flex: 1;
+            .card_number
+            {
+                padding-bottom: 2vw;
+            }
+        }
+        .star
+        {
+            width: 1.5vw;
+        }
+    }
+}

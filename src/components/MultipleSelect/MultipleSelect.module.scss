@@ -1,9 +1,8 @@
 @import '../../styles/theme-variable.scss';
 .container
 {
-    width: 280px;
+    width: 20vw;//280px;
     font-family: 'Bungee Inline';
-    color: rgba(38, 28, 60, 0.4);
     position: relative;
     user-select: none;
     -ms-user-select: none;
@@ -17,16 +16,24 @@
 {
     cursor: pointer;
     display: flex;
+    height: 5vw;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 0px 2vw 0 2vw;
+    //padding: 20px;
     border-radius: 8px;
     background-color: rgba(216, 182, 182, 0.4); 
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
+.container .select_container .select_text
+{
+    font-size: 1.1vw;
+}
+
 .container .select_container .select_image
 {
-    width: 25px;
+    width: 2vw;
     transform: rotate(-180deg);
     transition: transform 0.3s ease-out;
 }
@@ -40,7 +47,11 @@
 {
     position: absolute;
     width: 100%;
-    top: 95px;
+    top: 7vw;
+    z-index: 5;
+    max-height: 40vh;
+    padding-bottom: 1vw;
+    overflow-y: auto;
     @include themify($themes)
     {
         background-color: themed("optionsBackgroundColor");
@@ -85,10 +96,10 @@
 
 .container .options_container .option_custom_check
 {
-    margin-left: 20px;
-    top: 12px;
-    width: 40px;
-    height: 15px;
+    margin-left: 1vw;
+    top: 1vw;
+    width: 3vw;
+    height: 1vw;
     background: grey;
     display: inline-block;
     border-radius: 100px;
@@ -99,33 +110,34 @@
 {
     content: '';
 	position: absolute;
-	top: 2px;
-	left: 5px;
-	width: 10px;
-	height: 10px;
+	top: 0.085vw;
+	left: 0.4vw;
+	width: 0.8vw;
+	height: 0.8vw;
 	background: #fff;
 	border-radius: 90px;
 	transition: 0.3s;
 }
 
 .option_check:checked + .option_custom_check {
-	background: #bada55;
+	background-color: #bada55;
 }
 
 .option_check:checked + .option_custom_check:after {
-	left: calc(100% - 5px);
+	left: calc(100% - 0.5vw);
 	transform: translateX(-100%);
 }
 
 .container .options_container .option_custom_check:active::after
 {
-    width: 15px;
+    width: 1vw;
 }
 
 
 .container .options_container .option_text
 {
-    margin-left: 10px;
+    margin-left: 1vw;
+    font-size: 1.1vw;
     flex: 1;
     cursor: pointer;
 }

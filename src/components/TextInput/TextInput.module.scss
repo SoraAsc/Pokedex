@@ -15,11 +15,11 @@
 {
     @include themify($themes)
     {
-        color: themed("textColorTransparency");
+        color: themed("textColor");
     }
     background-color: transparent;
     padding: 0 1vw 0 2vw;
-    font-family: 'Bungee Inline';
+    font-family: 'Black Ops One';
     font-size: 1vw;
     flex: 1;
 }
@@ -28,7 +28,7 @@
 {
     @include themify($themes)
     {
-        color: themed("textColorTransparency");
+        color: themed("textColor40");
     }
 }
 

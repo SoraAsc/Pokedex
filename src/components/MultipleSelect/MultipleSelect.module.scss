@@ -2,14 +2,14 @@
 .container
 {
     width: 20vw;//280px;
-    font-family: 'Bungee Inline';
+    font-family: 'Black Ops One';
     position: relative;
     user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
     @include themify($themes)
     {
-        color: themed("textColorTransparency");
+        color: themed("textColor40");
     }
 }
 .container .select_container

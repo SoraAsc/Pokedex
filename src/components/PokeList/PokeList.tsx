@@ -1,16 +1,24 @@
 import { useEffect, useState } from 'react';
 import { getPokeList } from '../../api/api';
-import { Poke } from '../../interfaces/PokeInterface';
+import { dummyPoke, Poke, PokeStateAsProps } from '../../interfaces/PokeInterface';
 import CustomButton from '../CustomButton/CustomButton';
 import PokeCard from '../PokeCard/PokeCard';
 
 import styles from './PokeList.module.scss';
-const PokeList = () =>
+const PokeList = (props: {selePoke: PokeStateAsProps}) =>
 {
     const [pokeList, setPokeList] = useState<Poke[]>([]);
 
+    const handleClick = (poke_id: number) => 
+    {
+        props.selePoke.setPoke(pokeList.find(item => item.id == poke_id) || dummyPoke)
+    }
+
     useEffect( () => {
+        // getPokeList().then(result => setPokeList(pokeList.concat(result)));
+        
         getPokeList().then(result => setPokeList(result));
+        props.selePoke.setPoke(dummyPoke)
         
     }, []);
     return(
@@ -18,11 +26,9 @@ const PokeList = () =>
             <div className={styles.card_holder}>
                 {
                     pokeList.map((p) => 
-                        <PokeCard id={p.id} key={p.id} name={p.name} 
-                            artwork_image_url={p.artwork_image_url}/>
+                        <PokeCard poke={p} key={p.id} onClick={handleClick}/>
                     )
                 }
-
                 <CustomButton/>
             </div>
             

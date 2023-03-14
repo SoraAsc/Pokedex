@@ -6,16 +6,18 @@ import { useState } from 'react';
 import styles from './App.module.scss'
 import InfoBar from './components/InfoBar/InfoBar';
 import PokeList from './components/PokeList/PokeList';
+import { dummyPoke, Poke } from './interfaces/PokeInterface';
 
 function App() {
   const [theme, setTheme] = useState('light');
+  const [selectedPoke, setSelectedPoke] = useState<Poke>(dummyPoke);
   return (
     <ThemeContext.Provider value={{theme, setTheme}}>
       <div className={`theme-${theme}`}>
         <div className={styles.App}>     
           <Header/>
-          <PokeList/>
-          <InfoBar/>
+          <PokeList selePoke={{poke: selectedPoke, setPoke: setSelectedPoke}} />
+          <InfoBar poke={selectedPoke}/>
         </div>
       </div>
     </ThemeContext.Provider>

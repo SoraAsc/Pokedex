@@ -18,15 +18,8 @@ export async function getPokeList() : Promise<Poke[]>
                 name: pokeData.name,
                 artwork_image_url: pokeData.sprites.other['official-artwork'].front_default,
                 poke_genus: pokeSpeciesData.genera.find(item=> item.language.name == "en")?.genus
-                //artwork_image_url: pokeData.sprites.front_default
-                //artwork_image_url: pokeData.sprites.other["official-artwork"].front_default,
             };
         })
     )
-    // const PokeList: Poke[] = data.results.map((result: PokeAPI, index: number) => ({
-    //     id: index,
-    //     name: result.name,
-         
-    // }))
     return pokeList;
 }

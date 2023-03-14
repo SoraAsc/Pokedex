@@ -26,7 +26,7 @@ const PokeList = (props: {selePoke: PokeStateAsProps}) =>
             <div className={styles.card_holder}>
                 {
                     pokeList.map((p) => 
-                        <PokeCard poke={p} key={p.id} onClick={handleClick}/>
+                        <PokeCard poke={p} key={p.id} onClick={handleClick} selected_id={props.selePoke.poke.id}/>
                     )
                 }
                 <CustomButton/>

@@ -13,6 +13,7 @@
     @include themify($themes)
     {
         background-color: themed("pokeCardBackgroundColor");
+        border-color: themed("pokeCardBackgroundColor");
         color: themed("pokeCardTextColor");
     }
 
@@ -43,4 +44,15 @@
             width: 1.5vw;
         }
     }
+    
+    transition: background-color 1s, border-color 1s;
+}
+
+.container.selected
+{
+    @include themify($themes)
+    {
+        background-color: themed("pokeSelectedCardBackgroundColor");
+        border: 2px solid themed("pokeSelectedCardBorderColor");
+    }  
 }

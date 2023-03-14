@@ -2,15 +2,17 @@
 
 .container
 {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 1vw;
-    height: 1vw;
+    margin: 40px 0 20px 0;
     background-color: red;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 40px;
+    padding: 0.5vw 5vw 0.5vw 5vw;
+    font-family: "Bungee Inline";
+    font-size: 1.5vw;
     @include themify($themes)
     {
         background-color: themed("buttonBackgroundColor");
+        color: themed("textColor80");
     }
 }
+

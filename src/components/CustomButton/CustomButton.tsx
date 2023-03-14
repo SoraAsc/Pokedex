@@ -4,7 +4,7 @@ const CustomButton = () =>
 {
     return(
         <div className={styles.container}>
-            
+            <p>MORE...</p>
         </div>
     )
 }

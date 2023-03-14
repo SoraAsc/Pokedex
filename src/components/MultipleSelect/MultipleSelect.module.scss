@@ -59,6 +59,7 @@
     border-radius: 8px;
     display: flex;
     flex-direction: column;
+    
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     transform-origin: top;
     transform: scaleY(1);
@@ -76,7 +77,10 @@
 .container .options_container > div
 { 
     display: flex;
+    align-items: center;
+    margin-top: 5px;
     transition: opacity 0.8s ease-in;
+    //margin-bottom: 1vw;
 }
 
 .container .options_container.hideOptMenu > div
@@ -97,7 +101,6 @@
 .container .options_container .option_custom_check
 {
     margin-left: 1vw;
-    top: 1vw;
     width: 3vw;
     height: 1vw;
     background: grey;

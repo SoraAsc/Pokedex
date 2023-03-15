@@ -1,9 +1,9 @@
 
 import styles from './CustomButton.module.scss';
-const CustomButton = () =>
+const CustomButton = (props: {onClick: () => void}) =>
 {
     return(
-        <div className={styles.container}>
+        <div onClick={props.onClick} className={styles.container}>
             <p>MORE...</p>
         </div>
     )

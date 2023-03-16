@@ -10,8 +10,6 @@ const PokeDetails = (props: {poke: Poke}) =>
     const [imageOpt, setImageOpt] = useState<ImageOptions>("Artwork")
     function getDisplayImage()
     {
-        (Object.keys(FilterProperties) as (keyof typeof FilterProperties)[]).map( k => console.log(k) )
-        // console.log(FilterProperties.Bug)
         switch(imageOpt)
         {
             case "Home":

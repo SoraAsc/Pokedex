@@ -15,23 +15,24 @@ const PokeList = (props: {selePoke: PokeStateAsProps}) =>
     {
         props.selePoke.setPoke(pokeList.find(item => item.id == poke_id) || dummyPoke)
     }
-
-    const loadMore = () => { if(!isLoadingMore) {setIsLoadingMore(true);} }
-
-    useEffect( () => {
-        //getPokeList(offset).then(result => setPokeList([...pokeList, ...result]))
-        getPokeList(offset).then(result => 
+    const loadMore = () =>
+    {
+        if(!isLoadingMore)
+        {
+            setIsLoadingMore(true)
+            getPokeList(offset).then(result => 
             {
+                console.log(offset)
                 setPokeList([...pokeList, ...result])
                 setOffset(offset + 10)
-                setIsLoadingMore(false)
-                
+                setIsLoadingMore(false)                
             })
-    }, [isLoadingMore])
+        }
+    }
 
     useEffect( () => {
-        getPokeList().then(result => setPokeList(result))
-        setOffset(10)
+        getPokeList(0, 50).then(result => setPokeList(result))
+        setOffset(50)
         setIsLoadingMore(false)
         props.selePoke.setPoke(dummyPoke)        
     }, [])
@@ -40,12 +41,11 @@ const PokeList = (props: {selePoke: PokeStateAsProps}) =>
         <div className={styles.container}>
             <div className={styles.card_holder}>
                 {
-                    pokeList.map((p) => 
-                        <PokeCard poke={p} key={p.id} onClick={handleClick} selected_id={props.selePoke.poke.id}/>
-                    )
+                pokeList.map((p) => 
+                    <PokeCard poke={p} key={p.id} onClick={handleClick} is_selected={p.id == props.selePoke.poke.id}/>
+                )
                 }
-                <CustomButton onClick={loadMore}/>
-                
+                <CustomButton onClick={loadMore} isLoading={isLoadingMore}/>                
             </div>
         </div>
     )

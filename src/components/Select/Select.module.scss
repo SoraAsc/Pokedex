@@ -1,0 +1,112 @@
+@import '../../styles/theme-variable.scss';
+.container
+{
+    width: 15vw;//280px;
+    font-family: 'Black Ops One';
+    position: relative;
+    user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    @include themify($themes)
+    {
+        color: themed("textColor40");
+    }
+
+}
+
+.container .select_container
+{
+    cursor: pointer;
+    display: flex;
+    height: 5vw;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 2vw 0 2vw;
+    border-radius: 4px 4px 0 0;
+    background-color: rgba(216, 182, 182, 0.4); 
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.container .select_container .select_text
+{
+    font-size: 1.1vw;
+}
+
+.container .select_container .select_image
+{
+    width: 2vw;
+    transform: rotate(-180deg);
+    transition: transform 0.3s ease-out;
+}
+
+.container .select_container .select_image.hideOptMenu
+{
+    transform: rotate(0);
+    transition: transform 0.3s ease-in;
+}
+
+.container .options_container
+{
+    position: absolute;
+    width: 100%;
+    top: 5.4vw;
+    z-index: 5;
+    max-height: 40vh;
+    // padding-bottom: 1vw;
+    overflow-y: auto;
+    @include themify($themes)
+    {
+        background-color: themed("optionsBackgroundColor");
+    }
+    display: flex;
+    flex-direction: column;
+    
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transform-origin: top;
+    transform: scaleY(1);
+    transition: transform 0.2s ease-in;
+}
+
+.container .options_container.hideOptMenu
+{
+    transform: scaleY(0);
+    visibility: hidden;
+    overflow: hidden;
+    transition: all 0.2s ease-out;
+}
+
+.container .options_container > div
+{ 
+    display: flex;
+    cursor: pointer;
+    margin-top: 5px;
+    white-space: nowrap;
+    transition: opacity 0.8s ease-in;
+    //margin-bottom: 1vw;
+}
+
+.container .options_container.hideOptMenu > div
+{
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.1s ease-out;
+}
+
+.container .options_container > div:hover
+{
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.container .options_container > div .option_text
+{
+    cursor: pointer;
+    font-size: 1.1vw;
+    text-indent: 1vw;
+    text-align: center;
+    width: 0;
+}
+
+.container .options_container > div:hover .option_text
+{
+    width: calc(100% - 1vw);
+}

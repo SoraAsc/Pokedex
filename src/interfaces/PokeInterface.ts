@@ -1,3 +1,6 @@
+import React from "react";
+import { ElementsTypeName, ImageOptions } from "../types/PokeTypes";
+
 export interface ReducedPoke
 {
     id: number;
@@ -8,35 +11,35 @@ export interface ReducedPoke
 export interface Poke extends ReducedPoke
 {
     url: string;
+    default_image_url: string;
     artwork_image_url: string;
     home_image_url: string;
     dream_world_image_url: string;
     poke_genus: string,
+    weight: number,
+    height: number,
+    types: PokeType[],
 }
 
 export interface PokeAPI
 {
-    name: string,
+    name: "string",
     url: string,
     id: number,
+    weight: number,
+    height: number,
     sprites: other,
+    types: PokeType[],
+}
+
+interface PokeType
+{
+    type: {name: ElementsTypeName, url: string}
 }
 
 export interface PokeSpeciesAPI
 {
-    genera: genera[]
-}
-
-interface genera
-{
-    genus: string,
-    language: language,
-}
-
-interface language
-{
-    name: string,
-    url: string,
+    genera: {genus: string, language: {name: string, url: string}}[]
 }
 
 interface other
@@ -48,7 +51,9 @@ interface other
 interface image
 {
     front_default: string,
-    ["official-artwork"]: image
+    ["official-artwork"]: image,
+    home: image,
+    ["dream_world"]: image,
 }
 
 export interface PokeStateAsProps
@@ -57,13 +62,24 @@ export interface PokeStateAsProps
     setPoke: React.Dispatch<React.SetStateAction<Poke>>;
 }
 
+export interface ImageStateAsProps
+{
+    imageOption: ImageOptions
+    setImageOption: React.Dispatch<React.SetStateAction<ImageOptions>>;
+}
+
 export const dummyPoke: Poke =
 {
     url: "https://pokeapi.co/api/v2/pokemon/1/",
+    default_image_url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
     artwork_image_url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
-    home_image_url: "",
-    dream_world_image_url: "",
+    home_image_url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png",
+    dream_world_image_url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg",
     id: 1,
     name: "Bulbasaur",
-    poke_genus: "Seed Pokémon"
+    poke_genus: "Seed Pokémon",
+    height: 7,
+    weight: 69,
+    types: [{type: {name: "grass", url: "https://pokeapi.co/api/v2/type/12/"}}, 
+        {type: {name: "poison", url: "https://pokeapi.co/api/v2/type/4/"}}]
 }

@@ -4,10 +4,10 @@ import StarUnfav from '../../assets/imgs/star_unfav.svg';
 import StarFav from '../../assets/imgs/star_fav.svg';
 import { ReducedPoke } from '../../interfaces/PokeInterface';
 
-const PokeCard = (props: {poke: ReducedPoke, onClick: (id: number) => void, selected_id: number}) =>
+const PokeCard = (props: {poke: ReducedPoke, onClick: (id: number) => void, is_selected: boolean}) =>
 {
     return(
-        <div className={`${styles.container} ${props.selected_id == props.poke.id ? styles.selected : ''}`} 
+        <div className={`${styles.container} ${props.is_selected ? styles.selected : ''}`} 
             onClick={() => props.onClick(props.poke.id)}>
             <div className={styles.card_sub}>
                 <img className={styles.card_image} src={props.poke.artwork_image_url} alt="Pokémon Image" />

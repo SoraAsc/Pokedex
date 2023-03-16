@@ -7,6 +7,7 @@ import MoonIcon from '../../assets/imgs/moon.svg';
 import SunIcon from '../../assets/imgs/sun.svg';
 
 import styles from './Header.module.scss';
+import { IFilter } from '../../types/PokeTypes';
 
 const Header = () => 
 {

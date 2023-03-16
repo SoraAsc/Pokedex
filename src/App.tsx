@@ -7,6 +7,7 @@ import styles from './App.module.scss'
 import InfoBar from './components/InfoBar/InfoBar';
 import PokeList from './components/PokeList/PokeList';
 import { dummyPoke, Poke } from './interfaces/PokeInterface';
+import PokeDetails from './components/PokeDetails/PokeDetails';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -18,6 +19,7 @@ function App() {
           <Header/>
           <PokeList selePoke={{poke: selectedPoke, setPoke: setSelectedPoke}} />
           <InfoBar poke={selectedPoke}/>
+          <PokeDetails poke={selectedPoke}/>
         </div>
       </div>
     </ThemeContext.Provider>

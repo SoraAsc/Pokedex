@@ -13,7 +13,6 @@ const MultipleSelect = () =>
     {
         const opt: Filter = {name: e.target.name as FilterProperties, state: e.target.checked};
         options[opt.name] = opt
-        //console.log(options);
     }
 
     return(

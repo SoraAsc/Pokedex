@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ElementsType, FilterProperties } from '../../enums/PokeEnum';
 import { Poke } from '../../interfaces/PokeInterface';
 import { ImageOptions } from '../../types/PokeTypes';

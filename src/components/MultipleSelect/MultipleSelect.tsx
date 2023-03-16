@@ -1,5 +1,5 @@
 import {ChangeEvent, useState} from 'react';
-import { ElementsType, FilterProperties } from '../../enums/PokeEnum';
+import { FilterProperties } from '../../enums/PokeEnum';
 import { Filter, IMultipleFilter } from '../../types/PokeTypes';
 
 import ArrowIcon from '../../assets/imgs/arrow.svg';

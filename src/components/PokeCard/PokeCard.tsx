@@ -12,7 +12,8 @@ const PokeCard = (props: {poke: ReducedPoke, onClick: (id: number) => void, is_s
             <div className={styles.card_sub}>
                 <img className={styles.card_image} src={props.poke.artwork_image_url} alt="Pokémon Image" />
                 <div className={styles.card_details}>
-                    <p className={styles.card_number}>{"No."+("00"+props.poke.id).slice(-3)}</p>
+                    <p className={styles.card_number}>{"No."+(props.poke.id > 99 ?
+                        props.poke.id : ("00"+props.poke.id).slice(-3))}</p>
                     <p className={styles.card_name}>{props.poke.name}</p>
                 </div>
                 <img className={styles.star} src={StarUnfav} alt="Star Favorite Image" />

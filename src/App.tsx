@@ -8,16 +8,22 @@ import InfoBar from './components/InfoBar/InfoBar';
 import PokeList from './components/PokeList/PokeList';
 import { dummyPoke, Poke } from './interfaces/PokeInterface';
 import PokeDetails from './components/PokeDetails/PokeDetails';
+import { FilterContext } from './contexts/filter-context';
 
 function App() {
   const [theme, setTheme] = useState('light');
-  const [selectedPoke, setSelectedPoke] = useState<Poke>(dummyPoke);
+  const [selectedPoke, setSelectedPoke] = useState<Poke>(dummyPoke); //In the future change to Context
+  const [filterPokeSearchName, setFilterPokeSearchName] = useState<string>("")
+  const [filterTypeNames, setFilterTypeNames] = useState<string[]>([])
+  
   return (
     <ThemeContext.Provider value={{theme, setTheme}}>
       <div className={`theme-${theme}`}>
         <div className={styles.App}>     
-          <Header/>
-          <PokeList selePoke={{poke: selectedPoke, setPoke: setSelectedPoke}} />
+          <FilterContext.Provider value={{ filterPokeSearchName, filterTypeNames, setFilterPokeSearchName, setFilterTypeNames }}>
+            <Header/>
+            <PokeList selePoke={{poke: selectedPoke, setPoke: setSelectedPoke}} />
+          </FilterContext.Provider>
           <InfoBar poke={selectedPoke}/>
           <PokeDetails poke={selectedPoke}/>
         </div>

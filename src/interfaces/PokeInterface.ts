@@ -15,21 +15,26 @@ export interface Poke extends ReducedPoke
     artwork_image_url: string;
     home_image_url: string;
     dream_world_image_url: string;
-    poke_genus: string,
+    poke_genus: string | undefined,
     weight: number,
     height: number,
     types: PokeType[],
 }
 
-export interface PokeAPI
+export interface ReducedPokeAPI
 {
     name: "string",
     url: string,
+}
+
+export interface PokeAPI extends ReducedPokeAPI
+{
     id: number,
     weight: number,
     height: number,
     sprites: other,
     types: PokeType[],
+    species: {name: string, url: string},
 }
 
 interface PokeType

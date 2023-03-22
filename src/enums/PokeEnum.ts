@@ -17,7 +17,7 @@ export enum FilterProperties
     Ice = "ice",
     Bug = "bug",
     Ghost = "ghost",
-    Stell = "stell",
+    Steel = "steel",
     Dragon = "dragon",
     Dark = "dark",
     Fairy = "fairy",

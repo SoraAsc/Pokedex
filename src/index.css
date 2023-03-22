@@ -7,3 +7,16 @@
   border:0;
   transition: all 0.25s;
 }
+
+@font-face {
+  font-family: 'Pocket Monk';
+  src: url('PocketMonk.eot');
+  src: local('Pocket Monk'), local('PocketMonk'),
+      url('./assets/fonts/PocketMonk.eot?#iefix') format('embedded-opentype'),
+      url('./assets/fonts/PocketMonk.woff2') format('woff2'),
+      url('./assets/fonts/PocketMonk.woff') format('woff'),
+      url('./assets/fonts/Po1cketMonk.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

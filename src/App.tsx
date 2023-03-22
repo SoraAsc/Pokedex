@@ -9,18 +9,21 @@ import PokeList from './components/PokeList/PokeList';
 import { dummyPoke, Poke } from './interfaces/PokeInterface';
 import PokeDetails from './components/PokeDetails/PokeDetails';
 import { FilterContext } from './contexts/filter-context';
+import { Filter } from './types/PokeTypes';
 
 function App() {
   const [theme, setTheme] = useState('light');
   const [selectedPoke, setSelectedPoke] = useState<Poke>(dummyPoke); //In the future change to Context
   const [filterPokeSearchName, setFilterPokeSearchName] = useState<string>("")
-  const [filterTypeNames, setFilterTypeNames] = useState<string[]>([])
+  const [filterTypeNames, setFilterTypeNames] = useState<Filter[]>([])
+  const [filterTypeChange, setFilterTypeChange] = useState(false)
   
   return (
     <ThemeContext.Provider value={{theme, setTheme}}>
       <div className={`theme-${theme}`}>
         <div className={styles.App}>     
-          <FilterContext.Provider value={{ filterPokeSearchName, filterTypeNames, setFilterPokeSearchName, setFilterTypeNames }}>
+          <FilterContext.Provider value={{ filterPokeSearchName, filterTypeNames, filterTypeChange,
+             setFilterPokeSearchName, setFilterTypeNames, setFilterTypeChange }}>
             <Header/>
             <PokeList selePoke={{poke: selectedPoke, setPoke: setSelectedPoke}} />
           </FilterContext.Provider>

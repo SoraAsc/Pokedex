@@ -6,6 +6,12 @@ import { ThemeContext } from '../../contexts/theme-context';
 import MoonIcon from '../../assets/imgs/moon.svg';
 import SunIcon from '../../assets/imgs/sun.svg';
 
+import '../../assets/fonts/PocketMonk.eot'
+import '../../assets/fonts/PocketMonk.woff2'
+import '../../assets/fonts/PocketMonk.woff'
+import '../../assets/fonts/PocketMonk.ttf'
+import '../../assets/fonts/PocketMonk.svg'
+
 import styles from './Header.module.scss';
 
 const Header = () => 

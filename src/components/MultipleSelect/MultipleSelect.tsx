@@ -1,18 +1,26 @@
-import {ChangeEvent, useState} from 'react';
+import {ChangeEvent, useState, useContext} from 'react';
 import { FilterProperties } from '../../enums/PokeEnum';
-import { Filter, IMultipleFilter } from '../../types/PokeTypes';
+import { Filter } from '../../types/PokeTypes';
 
 import ArrowIcon from '../../assets/imgs/arrow.svg';
 
 import styles from './MultipleSelect.module.scss';
+import { FilterContext } from '../../contexts/filter-context';
 const MultipleSelect = () =>
 {
-    const options: IMultipleFilter = {};
-    const [isOptionsMenuOpened, setIsOptionsMenuOpened] = useState<boolean>(false);
+    const { setFilterTypeNames, filterTypeNames, setFilterTypeChange, filterTypeChange } = useContext(FilterContext)
+
+    const [isOptionsMenuOpened, setIsOptionsMenuOpened] = useState(false);
     function HandleFilterChange(e: ChangeEvent<HTMLInputElement>)
     {
         const opt: Filter = {name: e.target.name as FilterProperties, state: e.target.checked};
-        options[opt.name] = opt
+        const i = filterTypeNames.findIndex( e => e.name === opt.name)
+        
+        if( i > -1 ) filterTypeNames[i] = opt
+        else filterTypeNames.push(opt)
+
+        setFilterTypeNames(filterTypeNames)
+        setFilterTypeChange( !filterTypeChange )
     }
 
     return(

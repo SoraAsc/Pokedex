@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { getAllPokeWithName, getPokeList } from '../../api/api';
+import { getAllPokeWNameAndEleFilter, getPokeList } from '../../api/api';
 import { FilterContext } from '../../contexts/filter-context';
 import { dummyPoke, Poke, PokeStateAsProps } from '../../interfaces/PokeInterface';
 import CustomButton from '../CustomButton/CustomButton';
@@ -8,7 +8,7 @@ import PokeCard from '../PokeCard/PokeCard';
 import styles from './PokeList.module.scss';
 const PokeList = (props: {selePoke: PokeStateAsProps}) =>
 {
-    const { filterPokeSearchName } = useContext(FilterContext)
+    const { filterPokeSearchName, filterTypeNames, filterTypeChange } = useContext(FilterContext)
     
     const [pokeList, setPokeList] = useState<Poke[]>([]);
     const [tempPokeList, setTempPokeList] = useState<Poke[]>([])
@@ -17,10 +17,8 @@ const PokeList = (props: {selePoke: PokeStateAsProps}) =>
     const [isUsingFilter, setIsUsingFilter] = useState(false)
     const [typeTimeout, setTypeTimeout] = useState(-5)
 
-    const handleClick = (poke_id: number) => 
-    {
-        props.selePoke.setPoke(pokeList.find(item => item.id == poke_id) || dummyPoke)
-    }
+    const handleClick = (poke_id: number) => props.selePoke.setPoke(pokeList.find(item => item.id == poke_id) || dummyPoke)
+
     const loadMore = () =>
     {
         if(!isLoadingMore)
@@ -37,15 +35,15 @@ const PokeList = (props: {selePoke: PokeStateAsProps}) =>
     }
 
     useEffect( () => {
-        
         clearTimeout(typeTimeout)
-        if(filterPokeSearchName.length > 0)
+        if(filterTypeNames.length > 0)
         {            
             setTypeTimeout( setTimeout(() => {
-                getAllPokeWithName(filterPokeSearchName.toLowerCase()).then((result) => 
+                getAllPokeWNameAndEleFilter(filterPokeSearchName.toLocaleLowerCase(), 
+                    filterTypeNames.filter(x => x.state)).then(res => 
                 {
                     setIsUsingFilter(true)
-                    setPokeList(result)
+                    setPokeList(res)
                 }).catch( (err) => console.error(err))
             }, 500) );
             return () => clearTimeout(typeTimeout)
@@ -55,8 +53,7 @@ const PokeList = (props: {selePoke: PokeStateAsProps}) =>
             setIsUsingFilter(false)
             setPokeList(tempPokeList)           
         }
-
-    }, [filterPokeSearchName])
+    }, [filterTypeChange, filterPokeSearchName])
 
     useEffect( () => {
         getPokeList(0, 50).then(result => { setTempPokeList(result); setPokeList(result) })
@@ -65,6 +62,7 @@ const PokeList = (props: {selePoke: PokeStateAsProps}) =>
         setIsLoadingMore(false)
         props.selePoke.setPoke(dummyPoke)
         setIsUsingFilter(false)      
+        
     }, [])
 
     return(

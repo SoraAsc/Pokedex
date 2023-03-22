@@ -1,5 +1,7 @@
+import { Filter } from './../types/PokeTypes';
 import { Poke, PokeAPI, PokeSpeciesAPI, ReducedPokeAPI } from './../interfaces/PokeInterface';
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon"; 
+const TYPE_URL = "https://pokeapi.co/api/v2/type/";
 
 export async function getPokeList(offset: number = 0, limit: number = 10) : Promise<Poke[]>
 {
@@ -7,17 +9,38 @@ export async function getPokeList(offset: number = 0, limit: number = 10) : Prom
     const data: {count: number, results: ReducedPokeAPI[]} = await response.json();
     return await Promise.all(
         data.results.map(async (result: ReducedPokeAPI) => getPoke(result)))
-    //return pokeList;
 }
 
-export async function getAllPokeWithName(name: string) : Promise<Poke[]>
+
+export async function getAllPokeWNameAndEleFilter(name:string, eleNames: Filter[]) : Promise<Poke[]>
+{
+    const pokeList: Map<number, Poke> = new Map()
+    if(eleNames.length > 0)
+    {
+        for await (const ele of eleNames)
+        {
+            const response = await fetch(TYPE_URL+ele.name.toLocaleLowerCase())
+            const data: {pokemon: {pokemon: ReducedPokeAPI}[]} = await response.json()  
+            const tempP = data.pokemon.filter(p => p.pokemon.name.indexOf(name)>=0)
+                 .map(async (result:{pokemon: ReducedPokeAPI}) => getPoke(result.pokemon))
+            for await (const poke of tempP)
+            {
+                pokeList.set(poke.id, poke)
+            }
+        }
+        return Promise.all(pokeList.values())
+    } 
+    return getAllPokeWithName(name)        
+    
+}
+
+async function getAllPokeWithName(name: string) : Promise<Poke[]>
 {
     const response = await fetch(BASE_URL+ "?limit=100000&offset=0")
     const data: {count: number, results: ReducedPokeAPI[]} = await response.json()
     const filtersPokes = data.results.filter((p:ReducedPokeAPI) => p.name.includes(name))
     return await Promise.all(
         filtersPokes.slice(0, 20).map(async (result: ReducedPokeAPI) => getPoke(result)))
-    //return pokeList
 }
 
 async function getPoke(result: ReducedPokeAPI) : Promise<Poke>

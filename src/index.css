@@ -8,6 +8,11 @@
   transition: all 0.25s;
 }
 
+body::-webkit-scrollbar
+{
+  display: none;
+}
+
 @font-face {
   font-family: 'Pocket Monk';
   src: url('PocketMonk.eot');

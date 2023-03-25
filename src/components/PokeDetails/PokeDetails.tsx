@@ -1,8 +1,16 @@
-import { useState } from 'react';
-import { ElementsType, FilterProperties } from '../../enums/PokeEnum';
-import { IPoke } from '../../interfaces/PokeInterface';
-import { GenOptions, ImageOptions, SelectOptions } from '../../types/PokeTypes';
-import Select from '../Select/Select';
+import { useState } from 'react'
+import { ElementsType, FilterProperties } from '../../enums/PokeEnum'
+import { IPoke } from '../../interfaces/PokeInterface'
+import { GenOptions, ImageOptions, SelectOptions } from '../../types/PokeTypes'
+import CustomImageButton from '../CustomImageButton/CustomImageButton'
+import CustomToggle from '../CustomToggle/CustomToggle'
+import Select from '../Select/Select'
+
+import infoIcon from '../../assets/imgs/infoIcon.png'
+import statsIcon from '../../assets/imgs/statsIcon.png'
+import elementalIcon from '../../../public/elements/normal.svg'
+import movesIcon from '../../assets/imgs/movesIcon.png'
+
 
 import styles from './PokeDetails.module.scss';
 
@@ -61,6 +69,13 @@ const PokeDetails = (props: {poke: IPoke}) =>
             </div>
             <div className={styles.second_container}>
                 <Select selectedOpt={{value: genOpt, setValue: setGenOpt}} options={genOptions}/>
+                <div className={styles.container_toolbar}>
+                    <CustomImageButton image={infoIcon}/>
+                    <CustomImageButton image={statsIcon}/>
+                    <CustomImageButton image={elementalIcon}/>
+                    <CustomImageButton image={movesIcon}/>
+                </div>
+                <CustomToggle name='SHINY'/>
             </div>
         </div>
     )

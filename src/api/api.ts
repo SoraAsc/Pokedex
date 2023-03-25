@@ -61,5 +61,9 @@ async function getPoke(result: IReducedPokeAPI) : Promise<IPoke>
         height: pokeData.height,
         weight: pokeData.weight,
         types: pokeData.types,
+        flavor_text: pokeSpeciesData.flavor_text_entries.find(x => x.language.name == "en")?.flavor_text,
+        stats: {hp: pokeData.stats[0].base_stat, attack: pokeData.stats[1].base_stat, 
+            defense: pokeData.stats[2].base_stat, "special-attack": pokeData.stats[3].base_stat,
+            "special-defense": pokeData.stats[4].base_stat, speed: pokeData.stats[5].base_stat}
     };
 }

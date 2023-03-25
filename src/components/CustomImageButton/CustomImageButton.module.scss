@@ -1,0 +1,23 @@
+
+.container
+{
+    display: flex;
+    flex-direction: row;
+    img
+    {
+        cursor: pointer;
+        width: 3vw;
+        height: 3vw;
+        padding: 0.5vw;
+        filter: invert(41%) sepia(0%) saturate(2%) hue-rotate(357deg) brightness(97%) contrast(91%);
+        transition: all 1s;
+    }
+    
+    img:hover
+    {
+        background-color:#48BACC87;
+        background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='100' ry='100' stroke='%23000000FF' stroke-width='4' stroke-dasharray='50%25%2c 45%25' stroke-dashoffset='0' stroke-linecap='round'/%3e%3c/svg%3e");
+        border-radius: 100px;
+        filter: none;
+    }
+}

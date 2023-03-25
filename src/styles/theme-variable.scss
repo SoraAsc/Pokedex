@@ -1,6 +1,7 @@
 $themes:(
     light:(
           backgroundColor: #F4F4F4,
+          toolbarColor: rgb(216, 182, 182, 0.2),
           headerBackgroundColor: #F8F8F8,
           textColor: rgba(38, 28, 60, 1),
           textColor80: rgba(38, 28, 60, 0.8),
@@ -16,7 +17,8 @@ $themes:(
         ),
         dark:(
           backgroundColor: #373738,
-          headerBackgroundColor: #373738,
+          toolbarColor: rgb(216, 182, 182, 0.2),
+          headerBackgroundColor: #323235,
           textColor: rgba(255, 255, 255, 1),
           textColor40: rgba(255, 255, 255, 0.4),
           optionsBackgroundColor: #5B4E4E,

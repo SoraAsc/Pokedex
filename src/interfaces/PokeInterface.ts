@@ -25,6 +25,9 @@ export interface IPoke extends IReducedPoke
     weight: number,
     height: number,
     types: IPokeType[],
+    flavor_text: string | undefined,
+    stats: {hp: number, attack: number, defense: number, ["special-attack"]: number, ["special-defense"]: number,
+        speed: number},
 }
 
 export interface IReducedPokeAPI
@@ -40,7 +43,8 @@ export interface IPokeAPI extends IReducedPokeAPI
     height: number,
     sprites: {front_default: string, other: Iimage}
     types: IPokeType[],
-    species: {name: string, url: string},
+    species: {name: string, url: string},    
+    stats: {base_stat: number, stat: {name: string, url: string}}[]
 }
 
 interface Iimage
@@ -58,7 +62,9 @@ interface IPokeType
 
 export interface IPokeSpeciesAPI
 {
-    genera: {genus: string, language: {name: string, url: string}}[]
+    genera: {genus: string, language: {name: string, url: string}}[],
+    flavor_text_entries: {flavor_text: string, language: {name: string, url: string},
+        version: {name: string, url: string}}[]
 }
 
 export interface IStateAsProps<T>
@@ -85,5 +91,7 @@ export const dummyPoke: IPoke =
     height: 7,
     weight: 69,
     types: [{type: {name: "grass", url: "https://pokeapi.co/api/v2/type/12/"}}, 
-        {type: {name: "poison", url: "https://pokeapi.co/api/v2/type/4/"}}]
+        {type: {name: "poison", url: "https://pokeapi.co/api/v2/type/4/"}}],
+    flavor_text: 'A strange seed was\nplanted on its\nback at birth.\fThe plant sprouts\nand grows with\nthis POKéMON.',
+    stats: {hp: 45, attack: 49, defense: 49, "special-attack": 65, "special-defense": 65, speed: 45},
 }

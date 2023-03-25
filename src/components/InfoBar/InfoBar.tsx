@@ -1,6 +1,6 @@
-import { Poke } from '../../interfaces/PokeInterface';
+import { IPoke } from '../../interfaces/PokeInterface';
 import styles from './InfoBar.module.scss';
-const InfoBar = (props: {poke: Poke}) =>
+const InfoBar = (props: {poke: IPoke}) =>
 {
     return(
         <div className={styles.container}>

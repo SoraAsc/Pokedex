@@ -6,16 +6,15 @@ import { useState } from 'react';
 import styles from './App.module.scss'
 import InfoBar from './components/InfoBar/InfoBar';
 import PokeList from './components/PokeList/PokeList';
-import { dummyPoke, Poke } from './interfaces/PokeInterface';
+import { dummyPoke, IFilter, IPoke } from './interfaces/PokeInterface';
 import PokeDetails from './components/PokeDetails/PokeDetails';
 import { FilterContext } from './contexts/filter-context';
-import { Filter } from './types/PokeTypes';
 
 function App() {
   const [theme, setTheme] = useState('light');
-  const [selectedPoke, setSelectedPoke] = useState<Poke>(dummyPoke); //In the future change to Context
+  const [selectedPoke, setSelectedPoke] = useState<IPoke>(dummyPoke); //In the future change to Context
   const [filterPokeSearchName, setFilterPokeSearchName] = useState<string>("")
-  const [filterTypeNames, setFilterTypeNames] = useState<Filter[]>([])
+  const [filterTypeNames, setFilterTypeNames] = useState<IFilter[]>([])
   const [filterTypeChange, setFilterTypeChange] = useState(false)
   
   return (
@@ -25,7 +24,7 @@ function App() {
           <FilterContext.Provider value={{ filterPokeSearchName, filterTypeNames, filterTypeChange,
              setFilterPokeSearchName, setFilterTypeNames, setFilterTypeChange }}>
             <Header/>
-            <PokeList selePoke={{poke: selectedPoke, setPoke: setSelectedPoke}} />
+            <PokeList selePoke={{value: selectedPoke, setValue: setSelectedPoke}} />
           </FilterContext.Provider>
           <InfoBar poke={selectedPoke}/>
           <PokeDetails poke={selectedPoke}/>

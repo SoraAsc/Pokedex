@@ -1,13 +1,18 @@
 import { useState } from 'react';
 import { ElementsType, FilterProperties } from '../../enums/PokeEnum';
-import { Poke } from '../../interfaces/PokeInterface';
-import { ImageOptions } from '../../types/PokeTypes';
+import { IPoke } from '../../interfaces/PokeInterface';
+import { GenOptions, ImageOptions, SelectOptions } from '../../types/PokeTypes';
 import Select from '../Select/Select';
+
 import styles from './PokeDetails.module.scss';
 
-const PokeDetails = (props: {poke: Poke}) => 
+const PokeDetails = (props: {poke: IPoke}) => 
 {
-    const [imageOpt, setImageOpt] = useState<ImageOptions>("Artwork")
+    const imageOptions: ImageOptions[] = ["Artwork", "Home", "Default", "Dream World"]
+    const genOptions: GenOptions[] = ['Gen I', 'Gen II']
+
+    const [imageOpt, setImageOpt] = useState<SelectOptions>("Artwork")
+    const [genOpt, setGenOpt] = useState<SelectOptions>("Gen I")
     function getDisplayImage()
     {
         switch(imageOpt)
@@ -26,7 +31,9 @@ const PokeDetails = (props: {poke: Poke}) =>
 
     return (
         <div className={styles.container}>
-            <div className={styles.first_container}><Select imageURL={{imageOption: imageOpt, setImageOption: setImageOpt}}/></div>
+            <div className={styles.first_container}>
+                <Select selectedOpt={{value: imageOpt, setValue: setImageOpt}} options={imageOptions}/>
+            </div>
             <div className={styles.second_container}>
                 <div className={styles.first_column}>
                     <div className={styles.boxInfo}>
@@ -51,6 +58,9 @@ const PokeDetails = (props: {poke: Poke}) =>
                         )
                     }
                 </div>
+            </div>
+            <div className={styles.second_container}>
+                <Select selectedOpt={{value: genOpt, setValue: setGenOpt}} options={genOptions}/>
             </div>
         </div>
     )

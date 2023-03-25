@@ -1,23 +1,24 @@
 import { useEffect, useState, useContext } from 'react';
 import { getAllPokeWNameAndEleFilter, getPokeList } from '../../api/api';
 import { FilterContext } from '../../contexts/filter-context';
-import { dummyPoke, Poke, PokeStateAsProps } from '../../interfaces/PokeInterface';
+import { dummyPoke, IPoke, IStateAsProps } from '../../interfaces/PokeInterface';
 import CustomButton from '../CustomButton/CustomButton';
 import PokeCard from '../PokeCard/PokeCard';
 
 import styles from './PokeList.module.scss';
-const PokeList = (props: {selePoke: PokeStateAsProps}) =>
+const PokeList = (props: {selePoke: IStateAsProps<IPoke>}) =>
 {
     const { filterPokeSearchName, filterTypeNames, filterTypeChange } = useContext(FilterContext)
     
-    const [pokeList, setPokeList] = useState<Poke[]>([]);
-    const [tempPokeList, setTempPokeList] = useState<Poke[]>([])
+    const [pokeList, setPokeList] = useState<IPoke[]>([]);
+    const [tempPokeList, setTempPokeList] = useState<IPoke[]>([])
     const [offset, setOffset] = useState(0);
     const [isLoadingMore, setIsLoadingMore] = useState(false)
     const [isUsingFilter, setIsUsingFilter] = useState(false)
-    const [typeTimeout, setTypeTimeout] = useState(-5)
+    const [filterTimeout, setFilterTimeout] = useState(-5)
 
-    const handleClick = (poke_id: number) => props.selePoke.setPoke(pokeList.find(item => item.id == poke_id) || dummyPoke)
+    const handleClick = (poke_id: number) => props.selePoke.
+        setValue(pokeList.find(item => item.id == poke_id) || dummyPoke)
 
     const loadMore = () =>
     {
@@ -35,24 +36,24 @@ const PokeList = (props: {selePoke: PokeStateAsProps}) =>
     }
 
     useEffect( () => {
-        clearTimeout(typeTimeout)
-        if(filterTypeNames.length > 0)
+        clearTimeout(filterTimeout)
+        const filterTypeNamesActived = filterTypeNames.filter(x => x.state)
+        if(filterTypeNamesActived.length > 0 || filterPokeSearchName.length > 0)
         {            
-            setTypeTimeout( setTimeout(() => {
+            setFilterTimeout( setTimeout(() => {
                 getAllPokeWNameAndEleFilter(filterPokeSearchName.toLocaleLowerCase(), 
-                    filterTypeNames.filter(x => x.state)).then(res => 
+                    filterTypeNamesActived).then(res => 
                 {
                     setIsUsingFilter(true)
                     setPokeList(res)
                 }).catch( (err) => console.error(err))
             }, 500) );
-            return () => clearTimeout(typeTimeout)
+            return () => clearTimeout(filterTimeout)
         }
-        else 
-        {
-            setIsUsingFilter(false)
-            setPokeList(tempPokeList)           
-        }
+
+        setIsUsingFilter(false)
+        setPokeList(tempPokeList)           
+        
     }, [filterTypeChange, filterPokeSearchName])
 
     useEffect( () => {
@@ -60,7 +61,7 @@ const PokeList = (props: {selePoke: PokeStateAsProps}) =>
         
         setOffset(50)
         setIsLoadingMore(false)
-        props.selePoke.setPoke(dummyPoke)
+        props.selePoke.setValue(dummyPoke)
         setIsUsingFilter(false)      
         
     }, [])
@@ -70,7 +71,8 @@ const PokeList = (props: {selePoke: PokeStateAsProps}) =>
             <div className={styles.card_holder}>
                 {
                 pokeList.map((p) => 
-                    <PokeCard poke={p} key={p.id} onClick={handleClick} is_selected={p.id == props.selePoke.poke.id}/>
+                    <PokeCard poke={p} key={p.id} onClick={handleClick} 
+                        is_selected={p.id == props.selePoke.value.id}/>
                 )
                 }
                 {!isUsingFilter ? <CustomButton onClick={loadMore} isLoading={isLoadingMore}/> : ''}                

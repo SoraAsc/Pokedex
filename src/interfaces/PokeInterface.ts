@@ -1,79 +1,78 @@
 import React from "react";
+import { FilterProperties } from "../enums/PokeEnum";
 import { ElementsTypeName, ImageOptions } from "../types/PokeTypes";
 
-export interface ReducedPoke
+export interface IFilter
+{
+    name: FilterProperties,
+    state: boolean,
+}
+
+export interface IReducedPoke
 {
     id: number;
     name: string;
     artwork_image_url: string; 
 }
 
-export interface Poke extends ReducedPoke
+export interface IPoke extends IReducedPoke
 {
-    url: string;
-    default_image_url: string;
-    artwork_image_url: string;
-    home_image_url: string;
-    dream_world_image_url: string;
+    url: string,
+    default_image_url: string,
+    home_image_url: string,
+    dream_world_image_url: string,
     poke_genus: string | undefined,
     weight: number,
     height: number,
-    types: PokeType[],
+    types: IPokeType[],
 }
 
-export interface ReducedPokeAPI
+export interface IReducedPokeAPI
 {
     name: "string",
     url: string,
 }
 
-export interface PokeAPI extends ReducedPokeAPI
+export interface IPokeAPI extends IReducedPokeAPI
 {
     id: number,
     weight: number,
     height: number,
-    sprites: other,
-    types: PokeType[],
+    sprites: {front_default: string, other: Iimage}
+    types: IPokeType[],
     species: {name: string, url: string},
 }
 
-interface PokeType
+interface Iimage
+{
+    front_default: string,
+    ["official-artwork"]: Iimage,
+    home: Iimage,
+    ["dream_world"]: Iimage,
+}
+
+interface IPokeType
 {
     type: {name: ElementsTypeName, url: string}
 }
 
-export interface PokeSpeciesAPI
+export interface IPokeSpeciesAPI
 {
     genera: {genus: string, language: {name: string, url: string}}[]
 }
 
-interface other
+export interface IStateAsProps<T>
 {
-    front_default: string,
-    other: image,
+    value: T,
+    setValue: React.Dispatch<React.SetStateAction<T>>
 }
 
-interface image
+export interface IImageOptions<T>
 {
-    front_default: string,
-    ["official-artwork"]: image,
-    home: image,
-    ["dream_world"]: image,
+    name: String
 }
 
-export interface PokeStateAsProps
-{
-    poke: Poke;
-    setPoke: React.Dispatch<React.SetStateAction<Poke>>;
-}
-
-export interface ImageStateAsProps
-{
-    imageOption: ImageOptions
-    setImageOption: React.Dispatch<React.SetStateAction<ImageOptions>>;
-}
-
-export const dummyPoke: Poke =
+export const dummyPoke: IPoke =
 {
     url: "https://pokeapi.co/api/v2/pokemon/1/",
     default_image_url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",

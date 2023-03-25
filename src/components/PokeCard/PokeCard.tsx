@@ -2,9 +2,9 @@ import styles from './PokeCard.module.scss';
 
 import StarUnfav from '../../assets/imgs/star_unfav.svg';
 //import StarFav from '../../assets/imgs/star_fav.svg';
-import { ReducedPoke } from '../../interfaces/PokeInterface';
+import { IReducedPoke } from '../../interfaces/PokeInterface';
 
-const PokeCard = (props: {poke: ReducedPoke, onClick: (id: number) => void, is_selected: boolean}) =>
+const PokeCard = (props: {poke: IReducedPoke, onClick: (id: number) => void, is_selected: boolean}) =>
 {
     return(
         <div className={`${styles.container} ${props.is_selected ? styles.selected : ''}`} 

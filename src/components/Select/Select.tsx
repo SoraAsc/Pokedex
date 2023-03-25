@@ -1,28 +1,29 @@
-import styles from './Select.module.scss';
 import ArrowIcon from '../../assets/imgs/arrow.svg';
 import { MouseEvent, useState } from 'react';
-import { ImageOptions } from '../../types/PokeTypes';
-import { ImageStateAsProps } from '../../interfaces/PokeInterface';
+import { SelectOptions } from '../../types/PokeTypes';
+import { IStateAsProps } from '../../interfaces/PokeInterface';
 
-const Select = (props: {imageURL: ImageStateAsProps}) =>
+import styles from './Select.module.scss';
+
+const Select = (props: {selectedOpt: IStateAsProps<SelectOptions>, options: SelectOptions[]}) =>
 {
-    const options: ImageOptions[] = ["Artwork", "Home", "Default", "Dream World"];
     const [isOptionsMenuOpened, setIsOptionsMenuOpened] = useState<boolean>(false);
-    const [optionSelected, setOptionSelected] = useState<ImageOptions>("Artwork")
+    const [optionSelected, setOptionSelected] = useState<SelectOptions>(props.selectedOpt.value)
     function HandleFilterChange(e: MouseEvent<HTMLLabelElement>)
     {
-        setOptionSelected((e.target as HTMLFormElement).htmlFor as ImageOptions)
-        props.imageURL.setImageOption((e.target as HTMLFormElement).htmlFor as ImageOptions)
+        setOptionSelected((e.target as HTMLFormElement).htmlFor as SelectOptions)
+        props.selectedOpt.setValue((e.target as HTMLFormElement).htmlFor as SelectOptions)
         setIsOptionsMenuOpened(false)
     }
     return(
         <div className={styles.container}>
             <div onClick={() => setIsOptionsMenuOpened(!isOptionsMenuOpened)} className={styles.select_container}>
                 <p className={styles.select_text}>{optionSelected}</p>
-                <img className={`${styles.select_image} ${isOptionsMenuOpened ? '' : styles.hideOptMenu}`} alt='Select Arrow Icon' src={ArrowIcon}/>
+                <img className={`${styles.select_image} ${isOptionsMenuOpened ? '' : styles.hideOptMenu}`} 
+                    alt='Select Arrow Icon' src={ArrowIcon}/>
             </div>
             <div className={`${styles.options_container} ${isOptionsMenuOpened ? '' : styles.hideOptMenu}`}>
-                {options.map( k =>
+                {props.options.map( k =>
                     <div key={k}>
                         <label onClick={HandleFilterChange} className={styles.option_text} htmlFor={k}>{k}</label>
                     </div>

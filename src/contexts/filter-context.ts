@@ -1,14 +1,14 @@
 import { createContext } from "react";
-import { Filter } from "../types/PokeTypes";
+import { IFilter } from "../interfaces/PokeInterface";
 
 interface IFilterContextProps
 {
     filterPokeSearchName: string,
-    filterTypeNames: Filter[],
+    filterTypeNames: IFilter[],
     filterTypeChange: boolean,
     setFilterPokeSearchName: (name: string) => void,
-    setFilterTypeNames: (filterName: Filter[]) => void,
-    setFilterTypeChange: (state: boolean) => void,
+    setFilterTypeNames: (filterName: IFilter[]) => void,
+    setFilterTypeChange: (state: boolean | ((prevState: boolean) => boolean)) => void,
 }
 
 export const FilterContext = createContext<IFilterContextProps>({

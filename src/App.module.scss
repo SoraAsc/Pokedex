@@ -2,7 +2,7 @@
 
 .App
 {
-    height: 100vh;
+    height: 150vh;
     @include themify($themes)
     {
         background-color: themed("backgroundColor");

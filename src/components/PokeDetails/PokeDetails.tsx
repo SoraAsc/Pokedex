@@ -8,9 +8,14 @@ import Select from '../Select/Select'
 
 import infoIcon from '../../assets/imgs/infoIcon.png'
 import statsIcon from '../../assets/imgs/statsIcon.png'
-import elementalIcon from '../../../public/elements/normal.svg'
+import elementalIcon from '/elements/normal.svg'
 import movesIcon from '../../assets/imgs/movesIcon.png'
 
+import {Chart, RadialLinearScale, PointElement, LineElement, Filler, Tooltip} from 'chart.js'
+
+import { Radar } from 'react-chartjs-2'
+
+Chart.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip)
 
 import styles from './PokeDetails.module.scss';
 
@@ -35,7 +40,34 @@ const PokeDetails = (props: {poke: IPoke}) =>
                 return props.poke.default_image_url
         }
     }
-    
+   
+    const data = 
+    {
+        labels: ["HP", "Attack", "Defense", "Special Attack", "Special Defense", "Speed"],//Object.keys(props.poke.stats),
+        datasets: [
+            {
+                data: Object.values(props.poke.stats),
+                backgroundColor: ['rgba(255, 0, 0, 0.4)', 'rgba(0, 255, 0, 0.4)', 
+                'rgba(0, 0, 255, 0.4)', "rgba(255, 255, 0, 0.4)", 'rgba(0, 255, 255, 0.4)',
+                'rgba(0, 0, 0, 0.4)'],
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+            }
+        ]
+    }
+
+    const options =
+    {
+        responsive: true,
+        plugins: {
+
+        },
+        layout:
+        {
+            autoPadding: true
+        }
+        
+    }
 
     return (
         <div className={styles.container}>
@@ -77,6 +109,7 @@ const PokeDetails = (props: {poke: IPoke}) =>
                 </div>
                 <CustomToggle name='SHINY'/>
             </div>
+            <Radar data={data} options={options}/>
         </div>
     )
 }

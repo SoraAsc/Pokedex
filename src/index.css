@@ -8,6 +8,11 @@
   transition: all 0.25s;
 }
 
+body
+{
+  height: 100%;
+}
+
 body::-webkit-scrollbar
 {
   display: none;

@@ -6,7 +6,8 @@
     width: calc(100vw - (25vw));
     display: flex;
     flex-direction: column;
-
+    justify-content: flex-start;
+    align-items: center;
     .first_container
     {
         margin-top: 20px;
@@ -15,14 +16,13 @@
     }
     .second_container
     {
-        margin: 1vw 0 1vw 0;
         display: flex;
+        
+        width: 100%;
+        margin: 1vw 0 1vw 0;
         flex-direction: row;
         align-items: center;
-        //justify-content: space-around;
         justify-content: space-around;
-        // padding-left: 2vw;
-        // padding-right: 2vw;
         .first_column
         {
             display: flex;

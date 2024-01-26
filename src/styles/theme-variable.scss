@@ -1,35 +1,35 @@
-$themes:(
-    light:(
-          backgroundColor: #F4F4F4,
-          toolbarColor: rgb(216, 182, 182, 0.2),
-          headerBackgroundColor: #F8F8F8,
-          textColor: rgba(38, 28, 60, 1),
-          textColor80: rgba(38, 28, 60, 0.8),
-          textColor40: rgba(38, 28, 60, 0.4),
-          optionsBackgroundColor: #EEE0E1, 
-          infoBarBackgroundColor: rgba(211, 209, 209, 0.5),
-          pokeListBackgroundColor: #BDB7CA,
-          pokeCardBackgroundColor: rgba(250, 247, 240, 0.05),
-          pokeSelectedCardBackgroundColor: #EFF5F5,
-          pokeSelectedCardBorderColor: #497174,
-          pokeCardTextColor: #261C3C,
-          buttonBackgroundColor: rgba(216, 182, 182, 0.4),
-        ),
-        dark:(
-          backgroundColor: #373738,
-          toolbarColor: rgb(216, 182, 182, 0.2),
-          headerBackgroundColor: #323235,
-          textColor: rgba(255, 255, 255, 1),
-          textColor40: rgba(255, 255, 255, 0.4),
-          optionsBackgroundColor: #5B4E4E,
-          infoBarBackgroundColor: rgba(8, 8, 8, 0.5),
-          pokeListBackgroundColor: #8B888B,
-          pokeCardBackgroundColor: rgba(55, 55, 56, 0.05),
-          pokeSelectedCardBackgroundColor: #373738,
-          pokeSelectedCardBorderColor: #D7A738,
-          pokeCardTextColor: #F6E9B4,
-          buttonBackgroundColor: rgba(216, 182, 182, 0.4),
-    ),
+$themes: (
+  light: (
+    backgroundColor: #f4f4f4,
+    toolbarColor: rgb(216, 182, 182, 0.2),
+    headerBackgroundColor: #f8f8f8,
+    textColor: rgba(38, 28, 60, 1),
+    textColor80: rgba(38, 28, 60, 0.8),
+    textColor40: rgba(38, 28, 60, 0.4),
+    optionsBackgroundColor: #eee0e1,
+    infoBarBackgroundColor: rgba(211, 209, 209, 0.5),
+    pokeListBackgroundColor: #bdb7ca,
+    pokeCardBackgroundColor: rgba(250, 247, 240, 0.05),
+    pokeSelectedCardBackgroundColor: #eff5f5,
+    pokeSelectedCardBorderColor: #497174,
+    pokeCardTextColor: #261c3c,
+    buttonBackgroundColor: rgba(216, 182, 182, 0.4),
+  ),
+  dark: (
+    backgroundColor: #373738,
+    toolbarColor: rgb(216, 182, 182, 0.2),
+    headerBackgroundColor: #323235,
+    textColor: rgba(255, 255, 255, 1),
+    textColor40: rgba(255, 255, 255, 0.4),
+    optionsBackgroundColor: #5b4e4e,
+    infoBarBackgroundColor: rgba(8, 8, 8, 0.5),
+    pokeListBackgroundColor: #8b888b,
+    pokeCardBackgroundColor: rgba(55, 55, 56, 0.05),
+    pokeSelectedCardBackgroundColor: #373738,
+    pokeSelectedCardBorderColor: #d7a738,
+    pokeCardTextColor: #f6e9b4,
+    buttonBackgroundColor: rgba(216, 182, 182, 0.4),
+  ),
 );
 
 @mixin themify($themes) {
@@ -37,15 +37,19 @@ $themes:(
     :global(.theme-#{$theme}) & {
       $theme-map: () !global;
       @each $key, $submap in $map {
-        $value: map-get(map-get($themes, $theme), '#{$key}');
-        $theme-map: map-merge($theme-map, ($key: $value)) !global;
+        $value: map-get(map-get($themes, $theme), "#{$key}");
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
       }
       @content;
       $theme-map: null !global;
     }
   }
 }
-@function themed($key)
-{
-    @return map-get($theme-map, $key)
+@function themed($key) {
+  @return map-get($theme-map, $key);
 }

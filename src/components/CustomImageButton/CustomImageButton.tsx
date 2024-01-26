@@ -1,16 +1,13 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-import styles from './CustomImageButton.module.scss'
+import styles from "./CustomImageButton.module.scss";
 
+const CustomImageButton = (props: { image: string; onClick: () => void }) => {
+  return (
+    <div className={styles.container} onClick={props.onClick}>
+      <img src={props.image} alt="Image Button" />
+    </div>
+  );
+};
 
-
-const CustomImageButton = (props: {image: string}) =>
-{
-    return(
-        <div className={styles.container}>
-            <img src={props.image} alt="Image Button" />
-        </div>
-    )
-}
-
-export default CustomImageButton
+export default CustomImageButton;

@@ -74,8 +74,6 @@ const PokeDetails = (props: { poke: IPoke }) => {
   };
 
   const options: ChartOptions<"radar"> = {
-    // responsive: true,
-    // font: { weight: "bold", size: 1, family: "Bungee" },
     scales: {
       r: {
         pointLabels: {
@@ -86,7 +84,6 @@ const PokeDetails = (props: { poke: IPoke }) => {
         },
         suggestedMin: 1,
         ticks: {
-          // display: false,
           backdropColor: "transparent",
           color: "transparent",
           font: { size: 0 },
@@ -107,18 +104,20 @@ const PokeDetails = (props: { poke: IPoke }) => {
         <div className={styles.first_column}>
           <div className={styles.boxInfo}>
             <h5 className={styles.title}>H</h5>
-            <p className={styles.value}>{props.poke.height} M</p>
+            <p className={styles.value}>{props.poke.height / 10} M</p>
           </div>
           <div className={styles.boxInfo}>
             <h5 className={styles.title}>W</h5>
-            <p className={styles.value}>{props.poke.weight} KG</p>
+            <p className={styles.value}>{props.poke.weight / 10} KG</p>
           </div>
         </div>
-        <img
-          className={styles.poke_main_image}
-          src={getDisplayImage()}
-          alt="Poke Image"
-        />
+        <div className={styles.poke_main_image_holder}>
+          <img
+            className={styles.poke_main_image}
+            src={getDisplayImage()}
+            alt="Poke Image"
+          />
+        </div>
         <div className={styles.first_column}>
           {props.poke.types.map((t, id) => (
             <div key={id} className={styles.boxInfo}>
@@ -192,6 +191,10 @@ const PokeDetails = (props: { poke: IPoke }) => {
       >
         <Radar data={data} options={options} />
       </div>
+      <div
+        style={{ display: `${optionSelected == 1 ? "flex" : "none"}` }}
+        className={styles.container_pokeElemental}
+      ></div>
     </div>
   );
 };

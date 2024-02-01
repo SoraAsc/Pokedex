@@ -1,8 +1,9 @@
 @import "styles/theme-variable.scss";
 
 .App {
-  // height: 200vh;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
+  padding-bottom: calc(5vh + 7vw);
   @include themify($themes) {
     background-color: themed("backgroundColor");
   }

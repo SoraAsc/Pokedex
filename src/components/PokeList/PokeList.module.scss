@@ -1,47 +1,41 @@
-@import '../../styles/theme-variable.scss';
+@import "../../styles/theme-variable.scss";
 
-.container 
-{
-    position: fixed;
-    margin-top: 9vw;
-    z-index: 1;
-    width: 25vw;
-    height: calc(100vh - (5vw + 4vw)) ;
-    right: 0;
-    overflow: auto;
-    border-radius: 8px;
+.container {
+  position: fixed;
+  margin-top: 9vw;
+  z-index: 1;
+  width: 25vw;
+  height: calc(100vh - (5vw + 4vw));
+  right: 0;
+  overflow: auto;
+  border-radius: 8px;
 
-    @include themify($themes)
-    {
-        background-color: themed("pokeListBackgroundColor");
-    }
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    .card_holder
-    {
-        display: flex;
-        flex-direction: column;        
-        align-items: center; 
-        height: auto;
-    }
+  @include themify($themes) {
+    background-color: themed("pokeListBackgroundColor");
+  }
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  .card_holder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+  }
 }
 
-.container::-webkit-scrollbar
-{
-    width: 4px;
-    background-color: transparent;
+.container::-webkit-scrollbar {
+  width: 4px;
+  background-color: transparent;
 }
 
-.container::-webkit-scrollbar-track
-{
-    background-color: transparent;
+.container::-webkit-scrollbar-track {
+  background-color: transparent;
 }
 
-.container::-webkit-scrollbar-thumb
-{
-    background-color:#261C3C;
-    border-radius: 5px;
+.container::-webkit-scrollbar-thumb {
+  background-color: #261c3c;
+  border-radius: 5px;
 }
 
 .container::-webkit-scrollbar-thumb:hover {
-    background: #F6E9B4; 
+  background: #f6e9b4;
 }

@@ -1,7 +1,6 @@
 @import "../../styles/theme-variable.scss";
 
 .container {
-  height: calc(100vh - (4vw + 5vw + 2vw + 2vw));
   width: calc(100vw - (25vw));
   display: flex;
   flex-direction: column;
@@ -60,8 +59,13 @@
       }
     }
 
-    .poke_main_image {
-      height: 20vw;
+    .poke_main_image_holder {
+      width: 20vw;
+      text-align: center;
+      .poke_main_image {
+        height: 20vw;
+        max-width: 100%;
+      }
     }
 
     .container_toolbar {
@@ -123,8 +127,7 @@
   .container_pokeStats {
     justify-content: center;
     align-items: center;
-    width: 100%;
-    // height: auto;
+    width: 50vw;
     max-height: 400px;
   }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { FilterProperties } from "../enums/PokeEnum";
-import { ElementsTypeName, ImageOptions } from "../types/PokeTypes";
+import { ElementsTypeName } from "../types/PokeTypes";
 
 export interface IFilter {
   name: FilterProperties;
@@ -57,7 +57,7 @@ interface Iimage {
   ["dream_world"]: Iimage;
 }
 
-interface IPokeType {
+export interface IPokeType {
   type: { name: ElementsTypeName; url: string };
 }
 

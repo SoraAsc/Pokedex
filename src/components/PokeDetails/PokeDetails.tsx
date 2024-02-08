@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ElementsType } from "../../enums/PokeEnum";
 import { IPoke } from "../../interfaces/PokeInterface";
 import { GenOptions, ImageOptions, SelectOptions } from "../../types/PokeTypes";
@@ -26,6 +26,11 @@ Chart.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip);
 
 import styles from "./PokeDetails.module.scss";
 import { Radar } from "react-chartjs-2";
+import {
+  FilterElementalAttackingFactor,
+  FilterElementalDefendingFactor,
+} from "../../utils/ElementalUtils";
+import PokeType from "./PokeType/PokeType";
 
 const PokeDetails = (props: { poke: IPoke }) => {
   const imageOptions: ImageOptions[] = [
@@ -120,25 +125,7 @@ const PokeDetails = (props: { poke: IPoke }) => {
         </div>
         <div className={styles.first_column}>
           {props.poke.types.map((t, id) => (
-            <div key={id} className={styles.boxInfo}>
-              <img
-                className={styles.image}
-                width={35}
-                height={35}
-                style={{
-                  background: ElementsType[t.type.name]
-                    ? ElementsType[t.type.name].color
-                    : "red",
-                }}
-                src={
-                  ElementsType[t.type.name]
-                    ? ElementsType[t.type.name].imageURL
-                    : ""
-                }
-                alt="Element Image"
-              />
-              <p className={styles.value}>{t.type.name}</p>
-            </div>
+            <PokeType key={id} styles={styles} t={t} />
           ))}
         </div>
       </div>
@@ -151,18 +138,22 @@ const PokeDetails = (props: { poke: IPoke }) => {
           <CustomImageButton
             image={infoIcon}
             onClick={() => setOptionSelected(0)}
+            isSelected={optionSelected == 0}
           />
           <CustomImageButton
             image={statsIcon}
             onClick={() => setOptionSelected(1)}
+            isSelected={optionSelected == 1}
           />
           <CustomImageButton
             image={elementalIcon}
             onClick={() => setOptionSelected(2)}
+            isSelected={optionSelected == 2}
           />
           <CustomImageButton
             image={movesIcon}
             onClick={() => setOptionSelected(3)}
+            isSelected={optionSelected == 3}
           />
         </div>
         <CustomToggle name="SHINY" />
@@ -192,9 +183,46 @@ const PokeDetails = (props: { poke: IPoke }) => {
         <Radar data={data} options={options} />
       </div>
       <div
-        style={{ display: `${optionSelected == 1 ? "flex" : "none"}` }}
+        style={{ display: `${optionSelected == 2 ? "flex" : "none"}` }}
         className={styles.container_pokeElemental}
-      ></div>
+      >
+        <p>Attacking</p>
+        <div className={styles.second_column}>
+          {Object.entries(FilterElementalAttackingFactor(props.poke.types)).map(
+            (record) => (
+              <div
+                className={styles.element}
+                style={{
+                  background: ElementsType[record[0]]
+                    ? ElementsType[record[0]].color
+                    : "red",
+                }}
+              >
+                <img src={ElementsType[record[0]].imageURL} alt="Element" />
+                <span>{record[1]}x</span>
+              </div>
+            )
+          )}
+        </div>
+        <p>Defending</p>
+        <div className={styles.second_column}>
+          {Object.entries(FilterElementalDefendingFactor(props.poke.types)).map(
+            (record) => (
+              <div
+                className={styles.element}
+                style={{
+                  background: ElementsType[record[0]]
+                    ? ElementsType[record[0]].color
+                    : "red",
+                }}
+              >
+                <img src={ElementsType[record[0]].imageURL} alt="Element" />
+                <span>{record[1]}x</span>
+              </div>
+            )
+          )}
+        </div>
+      </div>
     </div>
   );
 };

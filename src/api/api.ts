@@ -81,7 +81,7 @@ async function getPoke(result: IReducedPokeAPI): Promise<IPoke> {
     height: pokeData.height,
     weight: pokeData.weight,
     types: pokeData.types,
-    flavor_text: pokeSpeciesData.flavor_text_entries.findLast(
+    flavor_text: pokeSpeciesData.flavor_text_entries.find(
       (x) => x.language.name == "en"
     )?.flavor_text,
     stats: {

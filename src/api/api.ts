@@ -71,10 +71,26 @@ async function getPoke(result: IReducedPokeAPI): Promise<IPoke> {
     url: pokeData.url,
     id: pokeData.id,
     name: pokeData.name,
-    default_image_url: pokeData.sprites.front_default,
-    artwork_image_url: pokeData.sprites.other["official-artwork"].front_default,
-    home_image_url: pokeData.sprites.other.home.front_default,
-    dream_world_image_url: pokeData.sprites.other["dream_world"].front_default,
+    default_image_url: [
+      pokeData.sprites.front_default,
+      pokeData.sprites.front_shiny,
+    ],
+    artwork_image_url: [
+      pokeData.sprites.other["official-artwork"].front_default,
+      pokeData.sprites.other["official-artwork"].front_shiny,
+    ],
+    home_image_url: [
+      pokeData.sprites.other["home"].front_default,
+      pokeData.sprites.other["home"].front_shiny,
+    ],
+    dream_world_image_url: [
+      pokeData.sprites.other["dream_world"].front_default,
+      pokeData.sprites.other["dream_world"].front_shiny,
+    ],
+    showdown_image_url: [
+      pokeData.sprites.other["showdown"].front_default,
+      pokeData.sprites.other["showdown"].front_shiny,
+    ],
     poke_genus: pokeSpeciesData.genera.find(
       (item) => item.language.name == "en"
     )?.genus,

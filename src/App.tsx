@@ -12,6 +12,7 @@ import { FilterContext } from "./contexts/filter-context";
 
 function App() {
   const [theme, setTheme] = useState("light");
+  const [isShiny, setIsShiny] = useState(false);
   const [selectedPoke, setSelectedPoke] = useState<IPoke>(dummyPoke); //In the future change to Context
   const [filterPokeSearchName, setFilterPokeSearchName] = useState<string>("");
   const [filterTypeNames, setFilterTypeNames] = useState<IFilter[]>([]);
@@ -23,21 +24,22 @@ function App() {
         <div className={styles.App}>
           <FilterContext.Provider
             value={{
-              filterPokeSearchName,
+              filterPokeSearchName: filterPokeSearchName,
               filterTypeNames,
               filterTypeChange,
               setFilterPokeSearchName,
               setFilterTypeNames,
               setFilterTypeChange,
+              isShiny: { value: isShiny, setValue: setIsShiny },
             }}
           >
             <Header />
             <PokeList
               selePoke={{ value: selectedPoke, setValue: setSelectedPoke }}
             />
+            <InfoBar poke={selectedPoke} />
+            <PokeDetails poke={selectedPoke} />
           </FilterContext.Provider>
-          <InfoBar poke={selectedPoke} />
-          <PokeDetails poke={selectedPoke} />
         </div>
       </div>
     </ThemeContext.Provider>

@@ -1,15 +1,12 @@
 import { useEffect, useState, useContext } from "react";
 import { getAllPokeWNameAndEleFilter, getPokeList } from "../../api/api";
 import { FilterContext } from "../../contexts/filter-context";
-import {
-  dummyPoke,
-  IPoke,
-  IStateAsProps,
-} from "../../interfaces/PokeInterface";
+import { dummyPoke, IPoke } from "../../interfaces/PokeInterface";
 import CustomButton from "../CustomButton/CustomButton";
 import PokeCard from "../PokeCard/PokeCard";
 
 import styles from "./PokeList.module.scss";
+import { IStateAsProps } from "../../interfaces/UtilsInterface";
 const PokeList = (props: { selePoke: IStateAsProps<IPoke> }) => {
   const { filterPokeSearchName, filterTypeNames, filterTypeChange } =
     useContext(FilterContext);

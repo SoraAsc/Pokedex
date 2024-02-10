@@ -1,5 +1,10 @@
-export type ImageOptions = "Artwork" | "Home" | "Default" | "Dream World";
-export type GenOptions = "Gen I" | "Gen II";
+export type ImageOptions =
+  | "Artwork"
+  | "Home"
+  | "Default"
+  | "Dream World"
+  | "Showdown";
+export type GenOptions = "Gen I" | "Gen II" | "Gen III" | "Gen *";
 
 export type SelectOptions = ImageOptions | GenOptions;
 

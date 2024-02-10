@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ElementsType } from "../../enums/PokeEnum";
 import { IPoke } from "../../interfaces/PokeInterface";
 import { GenOptions, ImageOptions, SelectOptions } from "../../types/PokeTypes";
@@ -10,6 +10,7 @@ import infoIcon from "../../assets/imgs/infoIcon.png";
 import statsIcon from "../../assets/imgs/statsIcon.png";
 import elementalIcon from "/elements/normal.svg";
 import movesIcon from "../../assets/imgs/movesIcon.png";
+import NotFoundImage from "/notFound.svg";
 
 import {
   Chart,
@@ -31,6 +32,7 @@ import {
   FilterElementalDefendingFactor,
 } from "../../utils/ElementalUtils";
 import PokeType from "./PokeType/PokeType";
+import { FilterContext } from "../../contexts/filter-context";
 
 const PokeDetails = (props: { poke: IPoke }) => {
   const imageOptions: ImageOptions[] = [
@@ -38,24 +40,30 @@ const PokeDetails = (props: { poke: IPoke }) => {
     "Home",
     "Default",
     "Dream World",
+    "Showdown",
   ];
-  const genOptions: GenOptions[] = ["Gen I", "Gen II"];
+  const genOptions: GenOptions[] = ["Gen I", "Gen II", "Gen III", "Gen *"];
+
+  const { isShiny } = useContext(FilterContext);
 
   const [imageOpt, setImageOpt] = useState<SelectOptions>("Artwork");
   const [genOpt, setGenOpt] = useState<SelectOptions>("Gen I");
   const [optionSelected, setOptionSelected] = useState(0);
-  function getDisplayImage() {
+  const getDisplayImage = () => {
+    const index = isShiny.value ? 1 : 0;
     switch (imageOpt) {
       case "Home":
-        return props.poke.home_image_url;
+        return props.poke.home_image_url[index];
       case "Dream World":
-        return props.poke.dream_world_image_url;
+        return props.poke.dream_world_image_url[index];
       case "Artwork":
-        return props.poke.artwork_image_url;
+        return props.poke.artwork_image_url[index];
+      case "Showdown":
+        return props.poke.showdown_image_url[index];
       default:
-        return props.poke.default_image_url;
+        return props.poke.default_image_url[index];
     }
-  }
+  };
 
   const data: ChartData<"radar", number[], string> = {
     labels: Object.keys(props.poke.stats).map((item) =>
@@ -119,7 +127,9 @@ const PokeDetails = (props: { poke: IPoke }) => {
         <div className={styles.poke_main_image_holder}>
           <img
             className={styles.poke_main_image}
-            src={getDisplayImage()}
+            src={
+              getDisplayImage() == undefined ? NotFoundImage : getDisplayImage()
+            }
             alt="Poke Image"
           />
         </div>
@@ -156,7 +166,11 @@ const PokeDetails = (props: { poke: IPoke }) => {
             isSelected={optionSelected == 3}
           />
         </div>
-        <CustomToggle name="SHINY" />
+        <CustomToggle
+          name="SHINY"
+          onClick={() => isShiny.setValue((v) => !v)}
+          isSelected={isShiny.value}
+        />
       </div>
       <div
         style={{ display: `${optionSelected == 0 ? "block" : "none"}` }}
@@ -191,6 +205,7 @@ const PokeDetails = (props: { poke: IPoke }) => {
           {Object.entries(FilterElementalAttackingFactor(props.poke.types)).map(
             (record) => (
               <div
+                key={"attack_" + record[0]}
                 className={styles.element}
                 style={{
                   background: ElementsType[record[0]]
@@ -209,6 +224,7 @@ const PokeDetails = (props: { poke: IPoke }) => {
           {Object.entries(FilterElementalDefendingFactor(props.poke.types)).map(
             (record) => (
               <div
+                key={"defense_" + record[0]}
                 className={styles.element}
                 style={{
                   background: ElementsType[record[0]]
